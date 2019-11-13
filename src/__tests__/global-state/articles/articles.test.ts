@@ -30,7 +30,7 @@ describe("Redux - author", () => {
   // ------------ ACTIONS
   // --------------------
   //@ts-ignore
-  let prismicConnection;
+  let prismicConnection: any;
   describe("ACTIONS", () => {
     //GET PRISMIC CONNECTION FOR ALL
     beforeAll(async () => {
@@ -71,7 +71,6 @@ describe("Redux - author", () => {
     //getAllArticlesPrismicQuery - seprated part of the prismic connection to get articles without any options
     test("getAllArticlesPrismicQuery - query prismic articles data without options", async () => {
       const data = await getAllArticlesPrismicQuery({
-        //@ts-ignore
         prismicConnection,
         page: 1
       });

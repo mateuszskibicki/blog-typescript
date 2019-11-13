@@ -1,6 +1,5 @@
 import React from "react";
-//@ts-ignore
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 const ErrorPage: React.MemoExoticComponent<() => JSX.Element> = React.memo(
   () => {
