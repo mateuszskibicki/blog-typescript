@@ -17,11 +17,7 @@ import {
 } from "../../types/article.types";
 //components
 import Loader from "../layout/Loader";
-const HeadSEO: React.LazyExoticComponent<
-  React.FunctionComponent<{
-    SEO: ISEO;
-  }>
-> = React.lazy(() => import("../layout/HeadSEO"));
+import HeadSEO from "../layout/HeadSEO";
 const ErrorPage: React.FunctionComponent<{}> = React.lazy(() =>
   import("./ErrorPage")
 );
@@ -127,7 +123,4 @@ const SingleArticlePage: React.FunctionComponent<IProps> = memo(
 const mapStateToProps = ({ article }: { article: any }) => ({ article });
 const mapDispatchToProps: { getArticleByUID: Function } = { getArticleByUID };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SingleArticlePage);
+export default connect(mapStateToProps, mapDispatchToProps)(SingleArticlePage);

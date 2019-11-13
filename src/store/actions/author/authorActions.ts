@@ -48,14 +48,14 @@ export const getAuthorByUidPrismic = (uid: any) => async (
     const authorData = authorPageHelper(data);
 
     //If no data -> return error
-    if (!authorData || !authorData[uid]) {
+    if (!authorData || !authorData.author) {
       dispatch({ type: SET_ERROR_AUTHOR_BY_UID_TRUE, payload: { uid } });
       dispatch(setLoadingStop());
       return;
     }
 
     //If get user ID
-    const userId: string = authorData[uid].author.id;
+    const userId: string = authorData.author.id;
 
     //Get related articles
     const connectedArticles = await getRelatedToAuthorArticles({
@@ -69,20 +69,18 @@ export const getAuthorByUidPrismic = (uid: any) => async (
       !connectedArticles.results ||
       connectedArticles.results.length === 0
     ) {
-      dispatch({ type: GET_AUTHOR_BY_UID, payload: authorData });
+      dispatch({ type: GET_AUTHOR_BY_UID, payload: { uid, authorData } });
       dispatch(setLoadingStop());
       return;
     }
 
-    const authorFullObject = authorData[uid];
-
     //If there is at least 1 article, add minified array to authorData object
-    authorFullObject.articles = articlesListHelper(connectedArticles);
+    authorData.articles = articlesListHelper(connectedArticles);
 
     // Dispatch object and at the very end set loading to false
     dispatch({
       type: GET_AUTHOR_BY_UID,
-      payload: authorData
+      payload: { uid, authorData }
     });
     dispatch(setLoadingStop());
   } catch (err) {
@@ -96,8 +94,6 @@ export const getRelatedToAuthorArticles = async (
   args: IgetRelatedToAuthorArticles
 ): Promise<any> => {
   const { prismicConnection, userId } = args;
-
-  console.log(process.env.REACT_APP_MAILCHIMP_TOKEN);
 
   if (!prismicConnection.query) return null;
 

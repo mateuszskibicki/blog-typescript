@@ -25,10 +25,8 @@ export const authorPageHelper = (data: any): any | null => {
   };
 
   return {
-    [author.uid]: {
-      author,
-      SEO: SEOhelper(authorData),
-      articles: []
-    }
+    author,
+    SEO: SEOhelper(authorData),
+    articles: []
   };
 };

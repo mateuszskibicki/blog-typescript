@@ -9,9 +9,7 @@ import { ISEO } from "../../types/common.types";
 import { IArticlesPage, ISingleArticle } from "../../types/article.types";
 // components
 import Loader from "../layout/Loader";
-const HeadSEO: React.FunctionComponent<{ SEO: ISEO | null }> = React.lazy(
-  (): Promise<any> => import("../layout/HeadSEO")
-);
+import HeadSEO from "../layout/HeadSEO";
 const ErrorPage: React.FunctionComponent<{}> = React.lazy(
   (): Promise<any> => import("./ErrorPage")
 );
@@ -114,7 +112,4 @@ const AllArticlesPage: React.FC<IProps | any> = memo(
 const mapStateToProps = ({ articles }: any) => ({ articles });
 const mapDispatchToProps = { getAllArticles };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AllArticlesPage);
+export default connect(mapStateToProps, mapDispatchToProps)(AllArticlesPage);

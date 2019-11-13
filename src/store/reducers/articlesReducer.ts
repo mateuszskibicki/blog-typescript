@@ -4,7 +4,7 @@ import {
   SET_ERROR_ALL_ARTICLES_FALSE,
   SET_ERROR_ALL_ARTICLES_TRUE
 } from "../actions/types";
-
+import { produce, Draft } from "immer";
 import { ISEO } from "../../types/common.types";
 
 interface IInitialState {
@@ -26,41 +26,33 @@ export const initialState: IInitialState = {
 };
 
 export default function(
-  state = initialState,
+  state: IInitialState = initialState,
   action: { type: string; payload?: any }
 ) {
-  switch (action.type) {
-    case SET_ERROR_ALL_ARTICLES_FALSE:
-      return {
-        ...state,
-        error: false
-      };
-    case SET_ERROR_ALL_ARTICLES_TRUE:
-      return {
-        ...state,
-        error: true
-      };
-    case GET_ALL_ARTICLES:
-      return {
-        ...state,
-        currentPage: action.payload.page,
-        totalPages: action.payload.totalPages,
-        category: action.payload.category,
-        searchText: action.payload.searchText,
-        SEO: action.payload.SEO,
-        [action.payload.page]: action.payload.articlesData
-      };
-    case GET_ALL_ARTICLES_INITIAL_STATE:
-      return {
-        ...initialState,
-        currentPage: action.payload.page,
-        totalPages: action.payload.totalPages,
-        category: action.payload.category,
-        searchText: action.payload.searchText,
-        SEO: action.payload.SEO,
-        [action.payload.page]: action.payload.articlesData
-      };
-    default:
-      return state;
-  }
+  return produce(state as IInitialState, (draft: Draft<any>) => {
+    switch (action.type) {
+      case SET_ERROR_ALL_ARTICLES_FALSE:
+        draft.error = false;
+        break;
+      case SET_ERROR_ALL_ARTICLES_TRUE:
+        draft.error = true;
+        break;
+      case GET_ALL_ARTICLES:
+        draft.currentPage = action.payload.page;
+        draft.totalPages = action.payload.totalPages;
+        draft.category = action.payload.category;
+        draft.searchText = action.payload.searchText;
+        draft.SEO = action.payload.SEO;
+        draft[action.payload.page] = action.payload.articlesData;
+        break;
+      case GET_ALL_ARTICLES_INITIAL_STATE:
+        draft.currentPage = action.payload.page;
+        draft.totalPages = action.payload.totalPages;
+        draft.category = action.payload.category;
+        draft.searchText = action.payload.searchText;
+        draft.SEO = action.payload.SEO;
+        draft[action.payload.page] = action.payload.articlesData;
+        break;
+    }
+  });
 }

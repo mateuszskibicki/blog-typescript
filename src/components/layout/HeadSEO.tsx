@@ -3,9 +3,11 @@ import { Helmet } from "react-helmet-async";
 
 import { ISEO } from "../../types/common.types";
 
-const HeadSEO: React.FC<{ SEO: ISEO }> = (props: {
-  SEO: ISEO;
-}): JSX.Element => {
+const HeadSEO: React.FC<{ SEO: ISEO | null }> = (props: {
+  SEO: ISEO | null;
+}): JSX.Element | null => {
+  if (props.SEO === null) return null;
+
   const {
     title = null,
     description = null,
@@ -33,8 +35,6 @@ const HeadSEO: React.FC<{ SEO: ISEO }> = (props: {
     article_published_time = null,
     article_modified_time = null
   } = props.SEO;
-
-  // return <div></div>;
 
   return (
     <Helmet>
