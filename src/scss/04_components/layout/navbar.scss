@@ -1,0 +1,130 @@
+.navbar {
+  background-color: rgba(0, 152, 111, 1);
+  height: 70px;
+
+  &__wrapper {
+    position: relative;
+  }
+
+  &__logo {
+    padding-right: 12px;
+    border-right: 3px solid #bce7d2;
+
+    svg {
+      background-color: #bce7d2;
+      // border-radius: 0px;
+      padding: 5px;
+      color: rgba(0, 152, 111, 1);
+      width: 45px;
+      height: 45px;
+    }
+  }
+
+  &__title {
+    font-size: 19px;
+    font-weight: 100;
+    color: #bce7d2;
+  }
+
+  &__search,
+  &__categories {
+    position: relative;
+
+    svg {
+      // border-radius: 0px;
+      color: #bce7d2;
+      width: 24px;
+      height: 24px;
+    }
+
+    input {
+      border: 2px solid #bce7d2;
+      background: none;
+      padding: 0 5px;
+      color: #bce7d2;
+      outline: none;
+      transition: 0.3s;
+      width: 150px;
+      &::placeholder {
+        color: rgba(#bce7d2, 0.5);
+      }
+      // @include media-sm {
+      //   width: 120px;
+      // }
+      // @include media-md {
+      //   width: 150px;
+      //}
+    }
+
+    input:hover,
+    input:active {
+      outline: none;
+      background: rgba(#bce7d2, 0.15);
+      transform: scale(1.05);
+    }
+  }
+
+  &__search-results {
+    border: 1px solid #eee;
+    position: absolute;
+    right: 0;
+    top: 45px;
+    background: white;
+    width: 90%;
+    max-height: 250px;
+    overflow-y: scroll;
+    padding: 12px;
+    z-index: 100;
+    @include media-sm {
+      width: 75%;
+    }
+    @include media-md {
+      width: 50%;
+    }
+    @include media-lg {
+      width: 40%;
+    }
+    @include media-xl {
+      width: 30%;
+    }
+
+    &::-webkit-scrollbar {
+      width: 3px;
+    }
+
+    svg {
+      width: 40px;
+    }
+
+    &--close-icon {
+      svg {
+        border: 2px solid $primary-color-1;
+        background: white;
+        border-radius: 100%;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 25px;
+        height: 25px;
+        padding: 3px;
+        color: $primary-color-1;
+        transition: 0.2s;
+        &:hover {
+          transform: scale(1.05);
+        }
+      }
+    }
+
+    &--single {
+      svg {
+        color: rgba(0, 152, 111, 1);
+        cursor: pointer;
+        transition: 0.2s;
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+.text-block-slice {
+  p,
+  li {
+    font-size: 1.25rem;
+    font-weight: 300;
+  }
+  strong {
+    font-weight: 600;
+  }
+  a {
+    color: #00986f !important;
+    font-weight: 400;
+    cursor: pointer;
+    transition: 0.2s;
+    &:hover {
+      transform: scale(1.04);
+    }
+  }
+}

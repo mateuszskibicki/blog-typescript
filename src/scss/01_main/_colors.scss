@@ -1,0 +1,61 @@
+// ------------------------------------------------------------------ \\
+// Default colours                                                     \\
+// ------------------------------------------------------------------ \\
+
+//https://flatuicolors.com/palette/ca
+
+//aqua
+$aqua-dark: rgba(1, 163, 164, 1); //#01A3A4
+$aqua-light: rgba(0, 210, 211, 1);
+//green
+$green-dark: rgba(16, 172, 132, 1);
+$green-light: rgba(29, 209, 161, 1);
+//blue
+$blue-dark: rgba(46, 134, 222, 1);
+$blue-dark-pastel: rgba(10, 189, 227, 1);
+$blue-light: rgba(84, 160, 255, 1);
+$blue-light-pastel: rgba(72, 219, 251, 1);
+//purple
+$purple-main: rgba(51, 1, 54, 1);
+$purple-dark: rgba(52, 31, 151, 1);
+$purple-light: rgba(95, 39, 205, 1);
+//pink
+$pink-dark: rgba(243, 104, 224, 1);
+$pink-light: rgba(255, 159, 243, 1);
+//yellow
+$yellow-dark: rgba(255, 159, 67, 1); //#FF9F43
+$yellow-light: rgba(254, 202, 87, 1);
+//red
+$red-dark: rgba(219, 65, 67, 1);
+$red-light: rgba(255, 107, 107, 1);
+//orange
+$orange-light: rgba(255, 112, 53, 1);
+//gray
+$gray-dark: rgba(131, 149, 167, 1);
+$gray-light: rgba(200, 214, 229, 1);
+$gray-bg: rgb(242, 242, 242) !important;
+//black
+$black-dark: rgba(34, 47, 62, 1); //#222F3E
+$black-light: rgba(87, 101, 116, 1);
+//white
+$white-primary: rgba(245, 245, 245, 1);
+
+$primary-color-1: rgba(0, 152, 111, 1) !default;
+$primary-color-2: $aqua-light !default;
+$secondary-color: $red-dark !default;
+$link-color: $primary-color-1 !default;
+$hover-color: $primary-color-1 !default;
+$text-color: $black-dark !default;
+$alert-color: $red-dark !default;
+
+// ------------------------------------------------------------------ \\
+// Colour Helpers                                                     \\
+// ------------------------------------------------------------------ \\
+
+.primary-color {
+  color: $primary-color-1;
+}
+
+.secondary-color {
+  color: $secondary-color;
+}

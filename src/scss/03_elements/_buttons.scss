@@ -1,0 +1,43 @@
+.btn-main {
+  border-radius: 0.25rem;
+  background-color: #00986f;
+  color: #f5f5f5;
+  font-weight: 600;
+  transition: 0.2s;
+  &:hover {
+    color: #f5f5f5;
+    transform: scale(1.02);
+  }
+}
+
+.btn-main-outlined {
+  border-radius: 0.25rem;
+  background-color: #f5f5f5;
+  color: #00986f;
+  border: 1px solid #00986f;
+}
+
+.btn-copied {
+  animation: copiedButton 1s linear;
+  position: relative;
+  opacity: 0;
+}
+
+@keyframes copiedButton {
+  0% {
+    opacity: 0;
+    left: -30px;
+  }
+  30% {
+    opacity: 0.8;
+    left: 0px;
+  }
+  70% {
+    opacity: 1;
+    left: 0px;
+  }
+  100% {
+    opacity: 0;
+    left: 30px;
+  }
+}

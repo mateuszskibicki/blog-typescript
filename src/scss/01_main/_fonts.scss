@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css?family=Titillium+Web:300,400,600,700");
+$font-titillium: "Titillium Web", sans-serif;
+
+.text-gray {
+  color: $black-light;
+}
+
+.text-dark {
+  color: $black-dark;
+}
+
+.text-400 {
+  font-weight: 400;
+}
+
+.text-600 {
+  font-weight: 600;
+}
+
+.text-700 {
+  font-weight: 700;
+}

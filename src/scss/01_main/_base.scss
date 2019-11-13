@@ -1,0 +1,43 @@
+// ------------------------------------------------------ \\
+// This file contains all BASE styles.
+// ------------------------------------------------------ \\
+
+/**
+ * Set up a decent box model on the root element
+ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background-color: rgba($white-primary, 0.3);
+  font-family: $font-titillium;
+  width: auto;
+  overflow-x: hidden;
+  min-height: 100vh;
+  padding-right: 0px !important;
+  font-size: 16px;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 9px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: $white-primary;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #bce7d2;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: darken(#bce7d2, 10%);
+}
