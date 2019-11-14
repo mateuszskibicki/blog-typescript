@@ -35,6 +35,7 @@ const App: React.FunctionComponent = (): JSX.Element => {
           <Router>
             <MainLayout>
               <Suspense fallback={<Loader />}>
+                {/* {TODO PLACEHOLDERS} */}
                 <Switch>
                   <Route path="/" component={Homepage} exact />
                   <Route path="/author/:uid" component={AuthorPage} exact />

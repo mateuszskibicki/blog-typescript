@@ -33,38 +33,32 @@ const AuthorPage: React.FunctionComponent<IProps> = ({
   // check if loading
   if (!authorData || loading.loading) return <Loader />;
 
-  // get single author data
-  const { author, articles, error, SEO } = authorData;
-
-  // author content -> slices
-  const authorContent: TAllSlices[] | null =
-    author && author.content ? author.content : null;
-
-  // last articles
-  const authorArticles: ISingleArticle[] | null = articles ? articles : null;
-
-  if (error || !author)
+  // check if error
+  if (authorData.error)
     return (
       <Suspense fallback={<Loader />}>
         <ErrorPage />
       </Suspense>
     );
 
+  // get slices
+  const content: Array<TAllSlices> | null = authorData.author.content || null;
+
   return (
     <>
-      <HeadSEO SEO={SEO} />
+      <HeadSEO SEO={authorData.SEO} />
       <Suspense fallback={<Loader />}>
-        {author && <HeadAboutAuthor author={author} />}
-        {authorContent && sliceComponentsHelper(authorContent)}
-        {authorArticles &&
-          authorArticles !== null &&
-          authorArticles.length > 0 && (
+        {authorData.author && <HeadAboutAuthor author={authorData.author} />}
+        {authorData.author.content && sliceComponentsHelper(content)}
+        {authorData.articles &&
+          authorData.articles !== null &&
+          authorData.articles.length > 0 && (
             <>
               <div className="container text-center m-auto">
                 <hr />
                 <h1>Last 3 articles:</h1>
               </div>
-              <ArticlesList articles={authorArticles} />
+              <ArticlesList articles={authorData.articles} />
             </>
           )}
       </Suspense>

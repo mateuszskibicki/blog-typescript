@@ -6,13 +6,12 @@ import { IAuthorSinglePage } from "../../../types/author.types";
 export const useGetAuthorByUidPrismic = (
   uid: string
 ): [IAuthorSinglePage, any] => {
-  const authors = useSelector((state: any) => state.authors);
-  const loading = useSelector((state: any) => state.loading);
+  const { authors, loading } = useSelector((state: any) => state);
   const dispatch = useDispatch();
 
-  const getUserByUID = useCallback(async (): Promise<any> => {
+  const getUserByUID = useCallback((): void => {
     if (authors && !authors[uid]) {
-      dispatch(await getAuthorByUidPrismic(uid));
+      dispatch(getAuthorByUidPrismic(uid));
     }
   }, [authors, uid, dispatch]);
 
