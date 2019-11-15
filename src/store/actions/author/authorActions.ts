@@ -10,8 +10,9 @@ import { articlesListHelper } from "../../../helpers/articles/ArticlesHelpers";
 import { IgetRelatedToAuthorArticles } from "../../../types/author.types";
 
 // Get author data by UID from prismic CMS
-export const getAuthorByUidPrismic = (uid: any) => async (
-  dispatch: Dispatch<any>
+export const getAuthorByUidPrismic = (uid: string) => async (
+  dispatch: Dispatch<{ type: string; payload: any }>
+  // getState: Function
 ) => {
   try {
     // Start loading
