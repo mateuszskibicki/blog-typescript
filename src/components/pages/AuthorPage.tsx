@@ -1,6 +1,7 @@
 // main
 import React, { Suspense, memo } from "react";
 import { useGetAuthorByUidPrismic } from "../../store/actions/author/useAuthorActions";
+import { useGetLast3Articles } from "../../store/actions/articles/useArticlesActions";
 import { sliceComponentsHelper } from "../../helpers/slice-helpers/SliceComponentsHelpers";
 
 import { IAuthorSingle } from "../../types/author.types";
@@ -29,6 +30,9 @@ const AuthorPage: React.FunctionComponent<IProps> = ({
 }: IProps): JSX.Element => {
   // get data
   const [authorData, loading] = useGetAuthorByUidPrismic(match.params.uid);
+  const [articles] = useGetLast3Articles();
+
+  console.log(articles);
 
   // check if loading
   if (!authorData || loading.loading) return <Loader />;

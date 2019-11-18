@@ -2,7 +2,8 @@ import {
   GET_ALL_ARTICLES,
   GET_ALL_ARTICLES_INITIAL_STATE,
   SET_ERROR_ALL_ARTICLES_FALSE,
-  SET_ERROR_ALL_ARTICLES_TRUE
+  SET_ERROR_ALL_ARTICLES_TRUE,
+  GET_3_LAST_ARTICLES
 } from "../actions/types";
 import { produce, Draft } from "immer";
 import { ISEO } from "../../types/common.types";
@@ -14,6 +15,7 @@ interface IInitialState {
   category: null | string;
   searchText: null | string;
   SEO: null | ISEO;
+  last3articles: any;
 }
 
 export const initialState: IInitialState = {
@@ -22,7 +24,8 @@ export const initialState: IInitialState = {
   totalPages: null,
   category: null,
   searchText: null,
-  SEO: null
+  SEO: null,
+  last3articles: null
 };
 
 export default function(
@@ -53,6 +56,8 @@ export default function(
         draft.SEO = action.payload.SEO;
         draft[action.payload.page] = action.payload.articlesData;
         break;
+      case GET_3_LAST_ARTICLES:
+        draft.last3articles = action.payload.last3articles;
     }
   });
 }

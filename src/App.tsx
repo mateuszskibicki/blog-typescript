@@ -22,16 +22,13 @@ const ErrorPage: React.FunctionComponent = React.lazy(
   (): Promise<any> => import("./components/pages/ErrorPage")
 );
 
-//redux store
-//@ts-ignore
-const reduxStore = configureStore(window.REDUX_INITIAL_DATA);
 const helmetContext = {};
 
 const App: React.FunctionComponent = (): JSX.Element => {
   return (
     <div className="app">
       <HelmetProvider context={helmetContext}>
-        <ReduxProvider store={reduxStore}>
+        <ReduxProvider store={configureStore}>
           <Router>
             <MainLayout>
               <Suspense fallback={<Loader />}>

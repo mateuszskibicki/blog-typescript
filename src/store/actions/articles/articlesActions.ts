@@ -3,7 +3,8 @@ import {
   GET_ALL_ARTICLES,
   GET_ALL_ARTICLES_INITIAL_STATE,
   SET_ERROR_ALL_ARTICLES_FALSE,
-  SET_ERROR_ALL_ARTICLES_TRUE
+  SET_ERROR_ALL_ARTICLES_TRUE,
+  GET_3_LAST_ARTICLES
 } from "../types";
 // loading
 import { setLoadingStart, setLoadingStop } from "../common/loadingActions";
@@ -17,16 +18,12 @@ import { Dispatch } from "react";
 import { ISEO, IPrismicConnection } from "../../../types/common.types";
 
 // Set articles error to true
-export const setArticlesErrorToTrue = () => (
-  dispatch: Dispatch<{ type: string }>
-): void => {
+export const setArticlesErrorToTrue = () => (dispatch: Dispatch<any>) => {
   dispatch({ type: SET_ERROR_ALL_ARTICLES_TRUE });
 };
 
 // Set articles error to false
-export const setArticlesErrorToFalse = () => (
-  dispatch: Dispatch<{ type: string }>
-): void => {
+export const setArticlesErrorToFalse = () => (dispatch: Dispatch<any>) => {
   dispatch({ type: SET_ERROR_ALL_ARTICLES_FALSE });
 };
 
@@ -43,7 +40,7 @@ export const getAllArticles = ({
   category = null,
   searchText = null,
   SEO = null
-}: IgetAllArticles) => async (dispatch: any): Promise<any> => {
+}: IgetAllArticles) => async (dispatch: Dispatch<any>): Promise<any> => {
   try {
     // Start loading
     dispatch(setLoadingStart());
@@ -163,6 +160,47 @@ export const getAllArticles = ({
     dispatch(setArticlesErrorToTrue());
     dispatch(setLoadingStop());
   }
+};
+
+/**
+|--------------------------------------------------
+| Get last 3 articles
+|--------------------------------------------------
+*/
+
+export const getLast3Articles = () => async (
+  dispatch: Dispatch<any>
+): Promise<any> => {
+  //Prismic connection
+  const PrismicEndpoint: string | null =
+    process.env.REACT_APP_PRISMIC_API_ENDPOINT || null;
+  const PrismicToken: string | null =
+    process.env.REACT_APP_PRISMIC_API_TOKEN || null;
+
+  //If no settings -> return error
+  if (!PrismicEndpoint || !PrismicToken) {
+    dispatch({ type: SET_ERROR_ALL_ARTICLES_TRUE });
+    dispatch(setLoadingStop());
+    return;
+  }
+
+  const prismicConnection: IPrismicConnection = await Prismic.getApi(
+    PrismicEndpoint,
+    {
+      accessToken: PrismicToken
+    }
+  );
+
+  const lastArticlesData = await getLast3ArticlesPrismicQuery({
+    prismicConnection
+  });
+
+  dispatch({
+    type: GET_3_LAST_ARTICLES,
+    payload: {
+      last3articles: articlesListHelper(lastArticlesData)
+    }
+  });
 };
 
 interface IqueryCommonPart {
@@ -305,5 +343,38 @@ export const getAllArticlesSEOPrismicQuery = async ({
 
   return await prismicConnection.query(
     Prismic.Predicates.at("document.type", "all-articles-seo")
+  );
+};
+
+export const getLast3ArticlesPrismicQuery = async ({
+  prismicConnection
+}: {
+  prismicConnection: IPrismicConnection;
+}): Promise<any> => {
+  if (!prismicConnection.query) return null;
+
+  return await prismicConnection.query(
+    Prismic.Predicates.at("document.type", "single-article"),
+    {
+      pageSize: 3,
+      orderings: "[my.single-article.date desc]",
+      fetch: [
+        "single-article.uid",
+        "single-article.title",
+        "single-article.short_description",
+        "single-article.series",
+        "single-article.categories",
+        "single-article.tags",
+        "single-article.date",
+        "single-article.small_img",
+        "single-article.author"
+      ],
+      fetchLinks: [
+        "author.uid",
+        "author.full_name",
+        "author.short_description",
+        "author.image_avatar"
+      ]
+    }
   );
 };
