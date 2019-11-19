@@ -1,6 +1,6 @@
 import { useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getAuthorByUidPrismic } from "./authorActions";
+import { getAuthorByUidPrismic } from "./authorActionsSlice";
 import { IAuthorSinglePage } from "../../../types/author.types";
 
 export const useGetAuthorByUidPrismic = (

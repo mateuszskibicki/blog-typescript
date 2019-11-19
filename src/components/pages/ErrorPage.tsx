@@ -1,8 +1,15 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
+import authors, {
+  getAuthorByUID,
+  setAuthorErrorTrue
+} from "../../store/reducers/authorSlice";
 
 const ErrorPage: React.MemoExoticComponent<() => JSX.Element> = React.memo(
   () => {
+    console.log(authors);
+    console.log(getAuthorByUID);
+    console.log(setAuthorErrorTrue);
     return (
       <>
         <Helmet>
